@@ -25,6 +25,3 @@ options:
 - I have removed the cookies preference panel from the downloaded HTMLs... it is rougth but it works.
 - I have chosen resonable wget options, in case you find better options, please send pull requests or let's post an issue
 - YOU need wget in path, so it is a bit simpler to use under linux
-
-
-s
