@@ -1,6 +1,6 @@
 # mirror-webnode
 This python script performs a mirror/copy of webpages that are listed on a provided file. This is intended to work better with WEBNODE.COM hosted sites. A copy of listed files are provided in the desired folder WITH the copy of the external resources (so it may be a bit cumbersome, tens of Megs).
-The output folder is automatically ZIP-compressed to a file named "PREFIX 202402 webnode site.zip" 202402 is YYYYMM
+The output folder is automatically ZIP-compressed to a file named "PREFIX 202402 webnode site.zip" where 202402 is current time in YYYYMM
 
 Webnode is used in few high school  textbooks as an exampl as  web sites design tools... and this script is a way to store, immutable, the student works
 
