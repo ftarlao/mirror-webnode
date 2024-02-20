@@ -11,7 +11,7 @@ You need: Python3 and the wget command.
 usage: download.py [-h] filename name_prefix [dest_folder]
 
 positional arguments:
-  filename     Name of the file containing the list of site URLs
+  filename     Name of the text file containing the list of site URLs. One URL per row.
   name_prefix  Prefix to add to zip archive name, e.g. it can be one
                class name
   dest_folder  Optional, Cartella di destinazione per le immagini dei siti,
