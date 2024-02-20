@@ -16,6 +16,8 @@ positional arguments:
                class name
   dest_folder  Cartella di destinazione per le immagini dei siti, default:
                'mirror' folder in the current execution path
+  num_threads  Number of threads, downloads N sites at same time.
+  num_levels   Number of site levels to dig in (and external links/resources).
 
 options:
   -h, --help   show this help message and exit
