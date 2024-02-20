@@ -8,9 +8,11 @@ You need: Python3 and the wget command.
 
 **Command usage:**
 
+```
 usage: download.py [-h] filename name_prefix [dest_folder] [num_threads] [num_levels]
 
 positional arguments:
+
   filename     Name of the text file containing the list of site URLs. One URL per row.
   name_prefix  Prefix to add to zip archive name, e.g. it can be one
                class name
@@ -23,6 +25,7 @@ positional arguments:
 
 options:
   -h, --help   show this help message and exit
+```
 
 **Issues:**
 - The Copy is not Perfect, iframes may not be replicated, so you lost the integrated maps and so on.
