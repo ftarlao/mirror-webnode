@@ -8,7 +8,7 @@ You need: Python3 and the wget command.
 
 **Command usage:**
 
-usage: download.py [-h] filename name_prefix [dest_folder]
+usage: download.py [-h] filename name_prefix [dest_folder] [num_threads] [num_levels]
 
 positional arguments:
   filename     Name of the text file containing the list of site URLs. One URL per row.
