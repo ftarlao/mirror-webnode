@@ -14,10 +14,12 @@ positional arguments:
   filename     Name of the file containing the list of site URLs
   name_prefix  Prefix to add to zip archive name, e.g. it can be one
                class name
-  dest_folder  Cartella di destinazione per le immagini dei siti, default:
-               'mirror' folder in the current execution path
-  num_threads  Number of threads, downloads N sites at same time.
-  num_levels   Number of site levels to dig in (and external links/resources).
+  dest_folder  Optional, Cartella di destinazione per le immagini dei siti,
+               default: 'mirror' folder in the current execution path
+  num_threads  Optional, Number of threads, downloads N sites at same
+               time.default: 4
+  num_levels   Optional, Number of site levels to dig in (and external
+               links/resources).default: 1
 
 options:
   -h, --help   show this help message and exit
