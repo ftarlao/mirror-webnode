@@ -27,6 +27,6 @@ options:
 **Issues:**
 - The Copy is not Perfect, iframes may not be replicated, so you lost the integrated maps and so on.
 - It creates local copies of external resources BUT the ones that are dynamically loaded (are not)
-- I have removed the cookies preference panel from the downloaded HTMLs... it is rougth but it works.
+- I have removed the cookies preference panel from the downloaded HTMLs... it is rough but it works.
 - I have chosen resonable wget options, in case you find better options, please send pull requests or let's post an issue
 - YOU need wget in path, so it is a bit simpler to use under linux
