@@ -29,38 +29,44 @@ DEFAULT_RELATIVE_FOLDER_NAME = "mirror"
 def remove_cookies_box_from_html_files(path):
     for root, _, files in os.walk(path):
         for file in files:
-            if file.endswith(".html"):
-                file_path = os.path.join(root, file)
-                print(file_path)
-                with open(file_path, 'r') as f:
-                    content = f.read()
-                updated_content = re.sub(r'<section\s*class="[^"]*"\s*id="cookiebar".+</section>', '', content, flags=re.DOTALL)
-                with open(file_path, 'w') as f:
-                    f.write(updated_content)
-
+            try:
+                if file.endswith(".html"):
+                    file_path = os.path.join(root, file)
+                    # print(file_path) #current file
+                    with open(file_path, 'r') as f:
+                        content = f.read()
+                    updated_content = re.sub(r'<section\s*class="[^"]*"\s*id="cookiebar".+</section>', '', content, flags=re.DOTALL)
+                    with open(file_path, 'w') as f:
+                        f.write(updated_content)
+            except Exception as e:
+                print("Problem with file: "+str(file)+" during cookie code removal, Error: "+str(e))
 
 def download_site(url):
+
     print("DOWNLOAD STARTED FOR: "+url)
-
     os.makedirs(DEST_FOLDER, exist_ok=True)
-    down_process = subprocess.run(
-        ['wget', '-U', 'Mozilla/5.0', '-e', 'robots=off', '-r', '-N', '--no-remove-listing',
-         '--timeout=' + str(TIMEOUT), '--tries=2',
-         '--convert-links', '-H', '-l', str(LEVELS), '--adjust-extension', '--page-requisites',
-         '--no-parent', '-P', DEST_FOLDER, url]
-        , cwd=BASE_FOLDER, stdout=subprocess.DEVNULL,
-        stderr=subprocess.STDOUT, universal_newlines=True)
-
-    down_process
-    # Let's remove the cookies preference panel
-    remove_cookies_box_from_html_files(DEST_FOLDER)
-    print("COMPLETED URL "+url)
-
+    try:
+        down_process = subprocess.run(
+            ['wget', '-U', 'Mozilla/5.0', '-e', 'robots=off', '-r', '-N', '--no-remove-listing',
+             '--timeout=' + str(TIMEOUT), '--tries=2',
+             '--convert-links', '-H', '-l', str(LEVELS), '--adjust-extension', '--page-requisites',
+             '--no-parent', '-P', str(DEST_FOLDER), str(url)]
+            , cwd=str(BASE_FOLDER), stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE, universal_newlines=True)
+    except Exception as e:
+        print("Error during wget execution " + url + ", Error: " + str(e))
+    try:
+        down_process
+        # Let's remove the cookies preference panel
+        remove_cookies_box_from_html_files(DEST_FOLDER)
+        print("COMPLETED URL "+url)
+    except Exception as e:
+        print("Error during cookie removal, current "+url+" Error "+str(e))
 
 # path = path to folder to compress, className name of the class to add to the ZIP name
 # name format eg:  "1F 202402 webnode mirror.zip"
 def zip_folder(path, className):
-    final_zip_name = str(className)+" "+datetime.now().strftime('%Y%m')+" webnode mirror"
+    final_zip_name = str(className)+" "+datetime.now().strftime('%Y%m%d')+" webnode mirror"
     shutil.make_archive(final_zip_name, 'zip', path)
     print("OUTPUT ZIP FILENAME: "+final_zip_name)
 
@@ -104,7 +110,7 @@ if __name__ == '__main__':
         p.map(download_site, stripped_urls)
         p.close()
         p.join()
-
+        print("Start zipping archive")
         zip_folder(DEST_FOLDER, name_prefix)
 
     print("******JOB DONE******")
