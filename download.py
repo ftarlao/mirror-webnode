@@ -78,7 +78,7 @@ if __name__ == '__main__':
     default_folder = os.path.join(BASE_FOLDER, DEFAULT_RELATIVE_FOLDER_NAME)
 
     parser = argparse.ArgumentParser("download.py")
-    parser.add_argument("filename", help="Nome del file contenente la lista delle URLs siti", type=str)
+    parser.add_argument("filename", help="Filename for Text file with list of sites, one per line ", type=str)
     parser.add_argument("name_prefix", help="Prefisso da aggiungere a nome articolo, e.g. puo' essere una"
                                           " classe: es:1E .. 4T", type=str)
     parser.add_argument("-d", "--dest_folder", help="Optional, Cartella di destinazione per le immagini dei siti,  "
