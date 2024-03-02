@@ -41,6 +41,7 @@ def remove_cookies_box_from_html_files(path):
             except Exception as e:
                 print("Problem with file: "+str(file)+" during cookie code removal, Error: "+str(e))
 
+
 def download_site(url):
 
     print("DOWNLOAD STARTED FOR: "+url)
@@ -80,16 +81,16 @@ if __name__ == '__main__':
     parser.add_argument("filename", help="Nome del file contenente la lista delle URLs siti", type=str)
     parser.add_argument("name_prefix", help="Prefisso da aggiungere a nome articolo, e.g. puo' essere una"
                                           " classe: es:1E .. 4T", type=str)
-    parser.add_argument("dest_folder", help="Optional, Cartella di destinazione per le immagini dei siti,  "
+    parser.add_argument("-d", "--dest_folder", help="Optional, Cartella di destinazione per le immagini dei siti,  "
                                             "default: 'mirror' folder in the current execution path",
                         type=str, default=default_folder, nargs='?')
 
-    parser.add_argument("num_threads", help="Optional, Number of threads, downloads N sites at same time."
+    parser.add_argument("-t", "--num_threads", help="Optional, Number of threads, downloads N sites at same time."
                                             "default: 4",
                         type=int, default=NUM_THREADS, nargs='?')
 
-    parser.add_argument("num_levels", help="Optional, Number of site levels to dig in (and external links/resources)."
-                                           "default: 1",
+    parser.add_argument("-l", "--num_levels", help="Optional, Number of site levels to dig in (and external "
+                                                   "links/resources). default: 1",
                         type=int, default=LEVELS, nargs='?')
 
     args = parser.parse_args()
@@ -101,7 +102,7 @@ if __name__ == '__main__':
     LEVELS = args.num_levels
     print("Destination Folder: ", DEST_FOLDER)
     print("Levels: ", LEVELS)
-    print("Threads: ",NUM_THREADS)
+    print("Threads: ", NUM_THREADS)
 
     with open(input_file, 'r') as f:
         urls = f.readlines()
