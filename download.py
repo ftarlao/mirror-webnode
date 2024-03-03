@@ -66,11 +66,22 @@ def download_site(url):
 
 # path = path to folder to compress, className name of the class to add to the ZIP name
 # name format eg:  "1F 202402 webnode mirror.zip"
+
+
 def zip_folder(path, className):
     final_zip_name = str(className)+" "+datetime.now().strftime('%Y%m%d')+" webnode mirror"
     shutil.make_archive(final_zip_name, 'zip', path)
     print("OUTPUT ZIP FILENAME: "+final_zip_name)
 
+
+def clean_url(url):
+    m = re.match("(?:https?\:\/\/)((?:\.?[\w-]+)+\.[\w-]+)(?:\/.*)", url)
+    if m:
+        url_new = "https://"+m.group(1)
+        return url_new
+    else:
+        #print("Invalid raw in source file, content: "+url)
+        return None
 
 if __name__ == '__main__':
 
@@ -107,8 +118,15 @@ if __name__ == '__main__':
     with open(input_file, 'r') as f:
         urls = f.readlines()
         stripped_urls = [s.strip() for s in urls]
+        validated_urls = []
+        for url in stripped_urls:
+            result = clean_url(url)
+            if result:
+                validated_urls.append(result)
+            else:
+                print("Invalid raw in URLs list file, content: " + url)
     with Pool(NUM_THREADS) as p:
-        p.map(download_site, stripped_urls)
+        p.map(download_site, validated_urls)
         p.close()
         p.join()
         print("Start zipping archive")
